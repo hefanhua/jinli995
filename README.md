@@ -138,7 +138,7 @@ def demo2():
             continue
             # print('1')
         else:
-            print('第{} 行数量错误'.format(j+1))
+            print('第{}行数量错误 实际数量应为 {}'.format(j+1,len(list_pos[j].replace(' ','').split(','))))
             wrong += 1
 
     if wrong == 0:
