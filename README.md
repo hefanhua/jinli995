@@ -45,8 +45,14 @@ def pds():
   )
     date_all = pd.concat([date1['仓库1'],date1['仓库2']],axis=0)
     print(date_all)
-
-
+#把嵌套列表元素个数取出
+def num_list(list1):
+    num = []
+    for i in list1:
+        if isinstance(i,list):
+            num.append(len(i))
+        else:num.append(1)
+    return num
     
 
 def xlex():
@@ -93,7 +99,7 @@ def demo1():
                 print(sheet1.cell_value(j,0),sheet1.cell_value(0,i))
                 break
 def demo2():
-    
+    wrong = 0
     filename3 = 'AM335XBD11.xls'
     date2 = xlrd.open_workbook(filename3)
     sheetname = date2.sheet_names()
@@ -118,26 +124,36 @@ def demo2():
     asm_sum = list_class.count('ASM')
     pth = list_class.count('PTH')
     # print(len(list_pos),len(list_num))
-    print(list_pos)
-    
-    # for j in range(len(list_pos)):
-    #     print(len(list(str(list_pos[j]))))
+    # print(list_pos)
+    # print(list(list_pos[4]))
+    a = (list_pos[2].replace(' ','')).split(',')#单元格,个数
+ 
 
+    # print(num_list(list_pos))
+    for j in range(len(list_pos)):
+        
+        # print(len(list_pos[j].replace(' ','').split(',')))
+        # print(int(list_num[j]))
+        if int(list_num[j]) == len(list_pos[j].replace(' ','').split(',')):
+            continue
+            # print('1')
+        else:
+            print('第{} 行数量错误'.format(j+1))
+            wrong += 1
 
-
-        # if int(list_num[j]) != len(list_pos[j]):
-        #     print('wrong')
-        # else:print('all')
+    if wrong == 0:
+        print("完全正确") 
+    else:print(wrong)
 
     for i in range(5,maxrows-1):
         pass
-
-    
         # print(len(sheet1.cell_value(i,pos_num)))
         # print(sheet1.cell_value(i,pos_num))
         # if int(sheet1.cell_value(i,num)) != len(sheet1.cell_value(i,pos_num)):
         #     print('wrong')
         # else:print("全对")
+    
+   
 
 
 if  __name__ == '__main__':
